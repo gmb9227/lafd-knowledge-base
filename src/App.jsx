@@ -74,6 +74,12 @@ export default function App() {
   const [expandedId, setExpandedId] = useState(null);
   const [searchBrowse, setSearchBrowse] = useState("");
   const [statusMsg, setStatusMsg] = useState("");
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [adminPass, setAdminPass] = useState("");
+  const [adminCode, setAdminCode] = useState("");
+  const [adminMsg, setAdminMsg] = useState("");
+  const [commitNote, setCommitNote] = useState("");
+  const [deploying, setDeploying] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -87,6 +93,11 @@ export default function App() {
       return () => clearTimeout(t);
     }
   }, [statusMsg]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("deploy")) setShowAdmin(true);
+  }, []);
 
   const handleAsk = async () => {
     if (!query.trim() || loading) return;
@@ -111,6 +122,19 @@ export default function App() {
     }
     setLoading(false);
     setTimeout(() => inputRef.current?.focus(), 100);
+  };
+
+  const handleDeploy = async () => {
+    if (!adminPass.trim() || !adminCode.trim() || deploying) return;
+    setDeploying(true);
+    setAdminMsg("Pushing to GitHub...");
+    try {
+      const res = await fetch("/api/deploy", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: adminPass, content: adminCode, commitMessage: commitNote.trim() || "Update App.jsx via deploy panel" }) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Deploy failed");
+      setAdminMsg("Deployed! " + data.message + " Commit: " + data.commitSha.substring(0, 7));
+    } catch (err) { setAdminMsg("Error: " + err.message); }
+    setDeploying(false);
   };
 
   const filteredPolicies = POLICY_DB.filter(p => {
@@ -254,6 +278,7 @@ export default function App() {
               <button role="tab" aria-selected={view === "ask"} aria-controls="panel-ask" id="tab-ask" className={`tab-btn ${view === "ask" ? "active" : ""}`} onClick={() => setView("ask")}>Ask AI</button>
               <button role="tab" aria-selected={view === "browse"} aria-controls="panel-browse" id="tab-browse" className={`tab-btn ${view === "browse" ? "active" : ""}`} onClick={() => setView("browse")}>Browse</button>
               <button role="tab" aria-selected={view === "about"} aria-controls="panel-about" id="tab-about" className={`tab-btn ${view === "about" ? "active" : ""}`} onClick={() => setView("about")}>Heritage</button>
+              {showAdmin && <button role="tab" aria-selected={view === "admin"} className={`tab-btn ${view === "admin" ? "active" : ""}`} onClick={() => setView("admin")}>Deploy</button>}
             </div>
           </nav>
         </div>
@@ -394,6 +419,31 @@ export default function App() {
             <div style={{ textAlign: "center", padding: "20px 0", borderTop: "1px solid rgba(200,168,78,0.1)", fontSize: 12, color: "#8899b0", fontStyle: "italic" }}>
               &quot;140 years of service to the people of Los Angeles with continuous improvements and progress to become a true Class 1 Fire Department.&quot;
             </div>
+          </div>
+        )}
+      
+        {view === "admin" && showAdmin && (
+          <div role="tabpanel" style={{ maxWidth: 720, margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: 24 }}>
+              <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 22, fontWeight: 700, color: "#d4d0c4", marginBottom: 8 }}>Deploy Panel</h2>
+              <p style={{ fontSize: 13, color: "#8899b0" }}>Paste updated App.jsx code below and push directly to GitHub. Vercel auto-deploys on commit.</p>
+            </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="deploy-pass" style={{ display: "block", fontSize: 12, color: "#8899b0", marginBottom: 4, fontWeight: 600 }}>Deploy Password</label>
+              <input id="deploy-pass" type="password" value={adminPass} onChange={e => setAdminPass(e.target.value)} placeholder="Enter deploy password" style={{ width: "100%", padding: "10px 14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(200,168,78,0.12)", borderRadius: 8, color: "#e2dfd8", fontFamily: "'Libre Franklin', sans-serif", fontSize: 14, outline: "none" }} />
+            </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="commit-msg" style={{ display: "block", fontSize: 12, color: "#8899b0", marginBottom: 4, fontWeight: 600 }}>Commit Message (optional)</label>
+              <input id="commit-msg" type="text" value={commitNote} onChange={e => setCommitNote(e.target.value)} placeholder="e.g. Fix contrast, add new policy" style={{ width: "100%", padding: "10px 14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(200,168,78,0.12)", borderRadius: 8, color: "#e2dfd8", fontFamily: "'Libre Franklin', sans-serif", fontSize: 14, outline: "none" }} />
+            </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="deploy-code" style={{ display: "block", fontSize: 12, color: "#8899b0", marginBottom: 4, fontWeight: 600 }}>App.jsx Content</label>
+              <textarea id="deploy-code" value={adminCode} onChange={e => setAdminCode(e.target.value)} placeholder="Paste the full contents of the updated App.jsx file here..." rows={18} style={{ width: "100%", padding: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(200,168,78,0.12)", borderRadius: 8, color: "#c4bfb0", fontFamily: "'JetBrains Mono', monospace", fontSize: 12, lineHeight: 1.6, outline: "none", resize: "vertical" }} />
+              <div style={{ fontSize: 12, color: "#8899b0", marginTop: 4 }}>{adminCode.length > 0 ? adminCode.length.toLocaleString() + " characters" : "No content yet"}</div>
+            </div>
+            <button onClick={handleDeploy} disabled={deploying || !adminPass.trim() || !adminCode.trim()} style={{ width: "100%", padding: "14px", background: deploying ? "rgba(200,168,78,0.15)" : "linear-gradient(135deg, #c8a84e, #a6882e)", border: "none", borderRadius: 8, color: deploying ? "#c8a84e" : "#0d1528", fontFamily: "'Libre Franklin', sans-serif", fontSize: 14, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", cursor: deploying ? "not-allowed" : "pointer", opacity: (!adminPass.trim() || !adminCode.trim()) ? 0.35 : 1 }}>{deploying ? "Pushing to GitHub..." : "Deploy to Production"}</button>
+            {adminMsg && (<div style={{ marginTop: 16, padding: "12px 16px", background: adminMsg.startsWith("Error") ? "rgba(220,50,50,0.1)" : "rgba(80,180,80,0.1)", border: "1px solid " + (adminMsg.startsWith("Error") ? "rgba(220,50,50,0.25)" : "rgba(80,180,80,0.25)"), borderRadius: 8, fontSize: 13, color: adminMsg.startsWith("Error") ? "#e88" : "#8c8", lineHeight: 1.5 }} role="alert">{adminMsg}</div>)}
+            <div style={{ marginTop: 24, padding: "16px", background: "rgba(200,168,78,0.03)", border: "1px solid rgba(200,168,78,0.08)", borderRadius: 8, fontSize: 13, color: "#8899b0", lineHeight: 1.7 }}><strong style={{ color: "#c8a84e" }}>How this works:</strong> When you click Deploy, the code is committed to your GitHub repo via API. Vercel detects the commit and automatically rebuilds the site in about 60 seconds.</div>
           </div>
         )}
       </main>
