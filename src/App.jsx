@@ -137,6 +137,17 @@ export default function App() {
     setDeploying(false);
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      setAdminCode(evt.target.result);
+      setAdminMsg("Loaded " + file.name + " (" + evt.target.result.length.toLocaleString() + " characters)");
+    };
+    reader.readAsText(file);
+  };
+
   const filteredPolicies = POLICY_DB.filter(p => {
     const matchCat = filterCat === "All" || p.category === filterCat;
     const matchJur = filterJur === "All" || p.jurisdiction === filterJur;
@@ -438,6 +449,14 @@ export default function App() {
             </div>
             <div style={{ marginBottom: 16 }}>
               <label htmlFor="deploy-code" style={{ display: "block", fontSize: 12, color: "#8899b0", marginBottom: 4, fontWeight: 600 }}>App.jsx Content</label>
+              
+              <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                <label htmlFor="file-upload" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", background: "rgba(200,168,78,0.08)", border: "1px solid rgba(200,168,78,0.2)", borderRadius: 6, color: "#c8a84e", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.2s" }}>
+                  <span>Upload File</span>
+                  <input id="file-upload" type="file" accept=".jsx,.js,.tsx,.ts,.txt" onChange={handleFileUpload} style={{ display: "none" }} />
+                </label>
+                <span style={{ fontSize: 12, color: "#596b85", alignSelf: "center" }}>or paste code below</span>
+              </div>
               <textarea id="deploy-code" value={adminCode} onChange={e => setAdminCode(e.target.value)} placeholder="Paste the full contents of the updated App.jsx file here..." rows={18} style={{ width: "100%", padding: "14px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(200,168,78,0.12)", borderRadius: 8, color: "#c4bfb0", fontFamily: "'JetBrains Mono', monospace", fontSize: 12, lineHeight: 1.6, outline: "none", resize: "vertical" }} />
               <div style={{ fontSize: 12, color: "#8899b0", marginTop: 4 }}>{adminCode.length > 0 ? adminCode.length.toLocaleString() + " characters" : "No content yet"}</div>
             </div>
