@@ -267,7 +267,69 @@ export default function App() {
         .pcard-meta { font-size: 11px; color: #8899b0; display: flex; gap: 10px; flex-wrap: wrap; }
         .pcard-body { padding: 0 16px 14px; margin-left: 68px; font-size: 13px; line-height: 1.7; color: #a0adc0; border-top: 1px solid rgba(200,168,78,0.06); padding-top: 10px; }
         .demo-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #c8a84e; border: 1px solid rgba(200,168,78,0.25); padding: 3px 10px; border-radius: 3px; margin-left: 10px; vertical-align: middle; }
-      `}</style>
+      
+    .hero-fire-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,120,20,0.18), transparent 70%);
+      mix-blend-mode: screen;
+      opacity: 0;
+      animation: fireFlicker 0.15s ease-in-out infinite alternate, fireFadeIn 0.5s 0.3s ease forwards, fireFadeOut 0.8s 5s ease forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-water-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 30% 50% at 85% 45%, rgba(180,220,255,0.12), transparent 60%),
+                  radial-gradient(ellipse 25% 40% at 15% 50%, rgba(200,230,255,0.08), transparent 50%);
+      mix-blend-mode: screen;
+      opacity: 0;
+      animation: waterSpray 0.2s ease-in-out infinite alternate, waterFadeIn 0.5s 0.5s ease forwards, waterFadeOut 0.8s 5.5s ease forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes fireFlicker {
+      0% { opacity: 0.5; transform: scale(1); }
+      25% { opacity: 0.8; transform: scale(1.01); }
+      50% { opacity: 0.3; transform: scale(0.99); }
+      75% { opacity: 0.9; transform: scale(1.02); }
+      100% { opacity: 0.6; transform: scale(1); }
+    }
+    @keyframes fireFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fireFadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    @keyframes waterSpray {
+      0% { opacity: 0.4; filter: blur(1px); }
+      33% { opacity: 0.7; filter: blur(2px); }
+      66% { opacity: 0.3; filter: blur(1.5px); }
+      100% { opacity: 0.6; filter: blur(1px); }
+    }
+    @keyframes waterFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes waterFadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    .hero-brightness-pulse {
+      animation: brightPulse 0.3s ease-in-out infinite alternate, brightFadeOut 0.8s 5s ease forwards;
+    }
+    @keyframes brightPulse {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.08); }
+      100% { filter: brightness(0.95); }
+    }
+    @keyframes brightFadeOut {
+      to { animation: none; filter: brightness(1); }
+    }
+  \n`}</style>
 
       {/* Skip navigation - WCAG 2.4.1 */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
@@ -296,8 +358,8 @@ export default function App() {
       </header>
 
       <div className="hero" role="img" aria-label="LAFD firefighters battling a structure fire at night">
-        <img src="/hero.jpg" alt="" aria-hidden="true" />
-        <div className="hero-overlay">
+        <img src="/hero.jpg" alt="" className="hero-brightness-pulse" aria-hidden="true" />
+        <div className="hero-fire-overlay" aria-hidden="true" /><div className="hero-water-overlay" aria-hidden="true" /><div className="hero-overlay">
           <div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
           <h1>LAFD Knowledge Base</h1>
           <div className="hero-motto">&quot;{HERITAGE.motto}&quot;</div>
