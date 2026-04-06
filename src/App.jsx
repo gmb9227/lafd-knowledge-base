@@ -206,7 +206,7 @@ export default function App() {
 
         .hero { position: relative; width: 100%; height: 420px; overflow: hidden; }
         .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,17,32,0.05) 0%, rgba(11,17,32,0.15) 40%, rgba(11,17,32,0.7) 75%, rgba(11,17,32,1) 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 28px; text-align: center; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(11,17,32,0.5) 75%, rgba(11,17,32,0.95) 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 28px; text-align: center; }
         .hero-est { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #c8a84e; margin-bottom: 6px; opacity: 0.85; }
         .hero h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 700; color: #ffffff; text-shadow: 0 2px 16px rgba(0,0,0,0.6); letter-spacing: -0.3px; }
         .hero-motto { font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 400; font-style: italic; color: #d4bc72; margin-top: 6px; letter-spacing: 0.5px; }
@@ -271,29 +271,15 @@ export default function App() {
         .pcard-meta { font-size: 11px; color: #8899b0; display: flex; gap: 10px; flex-wrap: wrap; }
         .pcard-body { padding: 0 16px 14px; margin-left: 68px; font-size: 13px; line-height: 1.7; color: #a0adc0; border-top: 1px solid rgba(200,168,78,0.06); padding-top: 10px; }
         .demo-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #c8a84e; border: 1px solid rgba(200,168,78,0.25); padding: 3px 10px; border-radius: 3px; margin-left: 10px; vertical-align: middle; }
-      
-    .hero-fire-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,100,15,0.28), transparent 70%);
-      mix-blend-mode: screen;
-      opacity: 0;
-      animation: fireFlicker 0.4s ease-in-out infinite alternate, fireFadeIn 0.5s 0.3s ease forwards, fireFadeOut 0.8s 5s ease forwards;
-      pointer-events: none;
-      z-index: 1;
-    }
-    @keyframes fireFlicker {
-      0% { opacity: 0.4; transform: scale(1); filter: hue-rotate(0deg); }
+    
       30% { opacity: 0.75; transform: scale(1.01); filter: hue-rotate(-5deg); }
       60% { opacity: 0.35; transform: scale(0.995); filter: hue-rotate(5deg); }
       100% { opacity: 0.65; transform: scale(1.005); filter: hue-rotate(-3deg); }
     }
-    @keyframes fireFadeIn {
-      from { opacity: 0; }
+    
       to { opacity: 1; }
     }
-    @keyframes fireFadeOut {
-      from { opacity: 1; }
+    
       to { opacity: 0; }
     }
       50% { opacity: 0.8; filter: blur(2px) brightness(1.5); }
@@ -303,16 +289,11 @@ export default function App() {
     }
       to { opacity: 0; }
     }
-    .hero-brightness-pulse {
-      animation: brightPulse 0.5s ease-in-out infinite alternate, brightFadeOut 0.8s 5s ease forwards;
-    }
-    @keyframes brightPulse {
-      0% { filter: brightness(1); }
+    
       50% { filter: brightness(1.08); }
       100% { filter: brightness(0.95); }
     }
-    @keyframes brightFadeOut {
-      to { animation: none; filter: brightness(1); }
+    
     }
   \n`}</style>
 
