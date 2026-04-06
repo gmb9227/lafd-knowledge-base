@@ -274,19 +274,18 @@ export default function App() {
       background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,100,15,0.28), transparent 70%);
       mix-blend-mode: screen;
       opacity: 0;
-      animation: fireFlicker 0.8s ease-in-out infinite alternate, fireFadeIn 0.5s 0.3s ease forwards, fireFadeOut 0.8s 5s ease forwards;
+      animation: fireFlicker 0.4s ease-in-out infinite alternate, fireFadeIn 0.5s 0.3s ease forwards, fireFadeOut 0.8s 5s ease forwards;
       pointer-events: none;
       z-index: 1;
     }
     .hero-water-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 35% 55% at 82% 42%, rgba(180,220,255,0.3), transparent 55%),
-                  radial-gradient(ellipse 30% 45% at 12% 48%, rgba(200,235,255,0.2), transparent 45%),
-                  radial-gradient(ellipse 20% 30% at 50% 35%, rgba(220,240,255,0.1), transparent 50%);
+      background: radial-gradient(ellipse 35% 55% at 82% 42%, rgba(150,210,255,0.35), transparent 50%),
+                  radial-gradient(ellipse 30% 45% at 10% 48%, rgba(170,225,255,0.28), transparent 40%);
       mix-blend-mode: screen;
       opacity: 0;
-      animation: waterSpray 0.5s ease-in-out infinite alternate, waterFadeIn 0.5s 0.5s ease forwards, waterFadeOut 0.8s 5.5s ease forwards;
+      animation: waterSpray 0.12s linear infinite alternate, waterFadeIn 0.6s 1.5s ease forwards, waterFadeOut 1s 6s ease forwards;
       pointer-events: none;
       z-index: 1;
     }
@@ -305,10 +304,9 @@ export default function App() {
       to { opacity: 0; }
     }
     @keyframes waterSpray {
-      0% { opacity: 0.5; filter: blur(0.5px) brightness(1.1); }
-      33% { opacity: 0.85; filter: blur(1.5px) brightness(1.2); }
-      66% { opacity: 0.4; filter: blur(1px) brightness(1.05); }
-      100% { opacity: 0.7; filter: blur(0.8px) brightness(1.15); }
+      0% { opacity: 0.3; filter: blur(0px) brightness(1.3); }
+      50% { opacity: 0.8; filter: blur(2px) brightness(1.5); }
+      100% { opacity: 0.35; filter: blur(0.5px) brightness(1.2); }
     }
     @keyframes waterFadeIn {
       from { opacity: 0; }
@@ -319,7 +317,7 @@ export default function App() {
       to { opacity: 0; }
     }
     .hero-brightness-pulse {
-      animation: brightPulse 0.9s ease-in-out infinite alternate, brightFadeOut 0.8s 5s ease forwards;
+      animation: brightPulse 0.5s ease-in-out infinite alternate, brightFadeOut 0.8s 5s ease forwards;
     }
     @keyframes brightPulse {
       0% { filter: brightness(1); }
