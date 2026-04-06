@@ -84,6 +84,10 @@ export default function App() {
   const inputRef = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
@@ -202,7 +206,7 @@ export default function App() {
 
         .hero { position: relative; width: 100%; height: 420px; overflow: hidden; }
         .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,17,32,0.15) 0%, rgba(11,17,32,0.4) 40%, rgba(11,17,32,0.85) 75%, rgba(11,17,32,1) 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 28px; text-align: center; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,17,32,0.05) 0%, rgba(11,17,32,0.15) 40%, rgba(11,17,32,0.7) 75%, rgba(11,17,32,1) 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 28px; text-align: center; }
         .hero-est { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #c8a84e; margin-bottom: 6px; opacity: 0.85; }
         .hero h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 700; color: #ffffff; text-shadow: 0 2px 16px rgba(0,0,0,0.6); letter-spacing: -0.3px; }
         .hero-motto { font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 400; font-style: italic; color: #d4bc72; margin-top: 6px; letter-spacing: 0.5px; }
