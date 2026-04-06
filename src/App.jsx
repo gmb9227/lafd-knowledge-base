@@ -207,7 +207,7 @@ export default function App() {
         .tab-btn.active { background: rgba(200,168,78,0.15); color: #c8a84e; }
         .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.04); color: #b8c4d8; }
 
-        .hero { position: relative; width: 100%; height: 420px; overflow: hidden; }
+        .hero { position: relative; width: 100%; aspect-ratio: 16/9; max-height: 500px; overflow: hidden; }
         .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(11,17,32,0.5) 75%, rgba(11,17,32,0.95) 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 28px; text-align: center; }
         .hero-est { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #c8a84e; margin-bottom: 6px; opacity: 0.85; }
@@ -327,7 +327,7 @@ export default function App() {
       </header>
 
       <div className="hero" aria-label="LAFD firefighters battling a structure fire at night">
-        <video src="/hero-video.mp4" autoPlay muted playsInline style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center 20%", display: "block", filter: "contrast(1.05) saturate(1.1)" }} aria-hidden="true" />
+        <video src="/hero-video.mp4" autoPlay muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block", filter: "contrast(1.05) saturate(1.1)" }} aria-hidden="true" />
         <div className="hero-overlay">
           <div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
           <h1>LAFD Knowledge Base</h1>
