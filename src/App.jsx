@@ -338,9 +338,9 @@ export default function App() {
         </div>
       </header>
 
-      <div className="hero" role="img" aria-label="LAFD firefighters battling a structure fire at night">
-        <img src="/hero.jpg" alt="" className="hero-brightness-pulse" aria-hidden="true" />
-        <div className="hero-fire-overlay" aria-hidden="true" /><div className="hero-overlay">
+      <div className="hero" aria-label="LAFD firefighters battling a structure fire at night">
+        <video src="/hero-video.mp4" autoPlay muted playsInline loop style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block" }} aria-hidden="true" />
+        <div className="hero-overlay">
           <div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
           <h1>LAFD Knowledge Base</h1>
           <div className="hero-motto">&quot;{HERITAGE.motto}&quot;</div>
