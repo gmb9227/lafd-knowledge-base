@@ -271,30 +271,30 @@ export default function App() {
     .hero-fire-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,120,20,0.18), transparent 70%);
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,100,15,0.28), transparent 70%);
       mix-blend-mode: screen;
       opacity: 0;
-      animation: fireFlicker 0.15s ease-in-out infinite alternate, fireFadeIn 0.5s 0.3s ease forwards, fireFadeOut 0.8s 5s ease forwards;
+      animation: fireFlicker 0.8s ease-in-out infinite alternate, fireFadeIn 0.5s 0.3s ease forwards, fireFadeOut 0.8s 5s ease forwards;
       pointer-events: none;
       z-index: 1;
     }
     .hero-water-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 30% 50% at 85% 45%, rgba(180,220,255,0.12), transparent 60%),
-                  radial-gradient(ellipse 25% 40% at 15% 50%, rgba(200,230,255,0.08), transparent 50%);
+      background: radial-gradient(ellipse 35% 55% at 82% 42%, rgba(180,220,255,0.3), transparent 55%),
+                  radial-gradient(ellipse 30% 45% at 12% 48%, rgba(200,235,255,0.2), transparent 45%),
+                  radial-gradient(ellipse 20% 30% at 50% 35%, rgba(220,240,255,0.1), transparent 50%);
       mix-blend-mode: screen;
       opacity: 0;
-      animation: waterSpray 0.2s ease-in-out infinite alternate, waterFadeIn 0.5s 0.5s ease forwards, waterFadeOut 0.8s 5.5s ease forwards;
+      animation: waterSpray 0.5s ease-in-out infinite alternate, waterFadeIn 0.5s 0.5s ease forwards, waterFadeOut 0.8s 5.5s ease forwards;
       pointer-events: none;
       z-index: 1;
     }
     @keyframes fireFlicker {
-      0% { opacity: 0.5; transform: scale(1); }
-      25% { opacity: 0.8; transform: scale(1.01); }
-      50% { opacity: 0.3; transform: scale(0.99); }
-      75% { opacity: 0.9; transform: scale(1.02); }
-      100% { opacity: 0.6; transform: scale(1); }
+      0% { opacity: 0.4; transform: scale(1); filter: hue-rotate(0deg); }
+      30% { opacity: 0.75; transform: scale(1.01); filter: hue-rotate(-5deg); }
+      60% { opacity: 0.35; transform: scale(0.995); filter: hue-rotate(5deg); }
+      100% { opacity: 0.65; transform: scale(1.005); filter: hue-rotate(-3deg); }
     }
     @keyframes fireFadeIn {
       from { opacity: 0; }
@@ -305,10 +305,10 @@ export default function App() {
       to { opacity: 0; }
     }
     @keyframes waterSpray {
-      0% { opacity: 0.4; filter: blur(1px); }
-      33% { opacity: 0.7; filter: blur(2px); }
-      66% { opacity: 0.3; filter: blur(1.5px); }
-      100% { opacity: 0.6; filter: blur(1px); }
+      0% { opacity: 0.5; filter: blur(0.5px) brightness(1.1); }
+      33% { opacity: 0.85; filter: blur(1.5px) brightness(1.2); }
+      66% { opacity: 0.4; filter: blur(1px) brightness(1.05); }
+      100% { opacity: 0.7; filter: blur(0.8px) brightness(1.15); }
     }
     @keyframes waterFadeIn {
       from { opacity: 0; }
@@ -319,7 +319,7 @@ export default function App() {
       to { opacity: 0; }
     }
     .hero-brightness-pulse {
-      animation: brightPulse 0.3s ease-in-out infinite alternate, brightFadeOut 0.8s 5s ease forwards;
+      animation: brightPulse 0.9s ease-in-out infinite alternate, brightFadeOut 0.8s 5s ease forwards;
     }
     @keyframes brightPulse {
       0% { filter: brightness(1); }
