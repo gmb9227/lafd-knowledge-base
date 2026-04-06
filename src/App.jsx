@@ -339,7 +339,7 @@ export default function App() {
       </header>
 
       <div className="hero" aria-label="LAFD firefighters battling a structure fire at night">
-        <video src="/hero-video.mp4" autoPlay muted playsInline loop style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block" }} aria-hidden="true" />
+        <video src="/hero-video.mp4" autoPlay muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block" }} aria-hidden="true" />
         <div className="hero-overlay">
           <div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
           <h1>LAFD Knowledge Base</h1>
