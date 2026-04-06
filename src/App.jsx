@@ -213,7 +213,8 @@ export default function App() {
         .hero-est { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #c8a84e; margin-bottom: 6px; opacity: 0.85; }
         .hero h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 700; color: #ffffff; text-shadow: 0 2px 16px rgba(0,0,0,0.6); letter-spacing: -0.3px; }
         .hero-motto { font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 400; font-style: italic; color: #d4bc72; margin-top: 6px; letter-spacing: 0.5px; }
-        .hero-divider { width: 48px; height: 2px; background: #c8a84e; margin: 12px auto 0; border-radius: 1px; opacity: 0.5; }
+        .hero-text-frost { background: rgba(11,17,32,0.45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 12px; padding: 20px 32px; border: 1px solid rgba(200,168,78,0.1); }
+    .hero-divider { width: 48px; height: 2px; background: #c8a84e; margin: 12px auto 0; border-radius: 1px; opacity: 0.5; }
 
         .stats-bar { background: rgba(200,168,78,0.04); border-bottom: 1px solid rgba(200,168,78,0.1); padding: 10px 24px; }
         .stats-bar-inner { max-width: 980px; margin: 0 auto; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
@@ -329,10 +330,10 @@ export default function App() {
       <div className="hero" aria-label="LAFD firefighters battling a structure fire at night">
         <video src="/hero-video.mp4" autoPlay muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block", filter: "contrast(1.05) saturate(1.1)" }} aria-hidden="true" />
         <div className="hero-overlay">
-          <div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
+          <div className="hero-text-frost"><div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
           <h1>LAFD Knowledge Base</h1>
           <div className="hero-motto">&quot;{HERITAGE.motto}&quot;</div>
-          <div className="hero-divider" aria-hidden="true" />
+          <div className="hero-divider" aria-hidden="true" /></div>
         </div>
       </div>
 
