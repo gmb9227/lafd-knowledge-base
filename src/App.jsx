@@ -278,17 +278,6 @@ export default function App() {
       pointer-events: none;
       z-index: 1;
     }
-    .hero-water-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 35% 55% at 82% 42%, rgba(150,210,255,0.35), transparent 50%),
-                  radial-gradient(ellipse 30% 45% at 10% 48%, rgba(170,225,255,0.28), transparent 40%);
-      mix-blend-mode: screen;
-      opacity: 0;
-      animation: waterSpray 0.12s linear infinite alternate, waterFadeIn 0.6s 1.5s ease forwards, waterFadeOut 1s 6s ease forwards;
-      pointer-events: none;
-      z-index: 1;
-    }
     @keyframes fireFlicker {
       0% { opacity: 0.4; transform: scale(1); filter: hue-rotate(0deg); }
       30% { opacity: 0.75; transform: scale(1.01); filter: hue-rotate(-5deg); }
@@ -303,17 +292,11 @@ export default function App() {
       from { opacity: 1; }
       to { opacity: 0; }
     }
-    @keyframes waterSpray {
-      0% { opacity: 0.3; filter: blur(0px) brightness(1.3); }
       50% { opacity: 0.8; filter: blur(2px) brightness(1.5); }
       100% { opacity: 0.35; filter: blur(0.5px) brightness(1.2); }
     }
-    @keyframes waterFadeIn {
-      from { opacity: 0; }
       to { opacity: 1; }
     }
-    @keyframes waterFadeOut {
-      from { opacity: 1; }
       to { opacity: 0; }
     }
     .hero-brightness-pulse {
@@ -357,7 +340,7 @@ export default function App() {
 
       <div className="hero" role="img" aria-label="LAFD firefighters battling a structure fire at night">
         <img src="/hero.jpg" alt="" className="hero-brightness-pulse" aria-hidden="true" />
-        <div className="hero-fire-overlay" aria-hidden="true" /><div className="hero-water-overlay" aria-hidden="true" /><div className="hero-overlay">
+        <div className="hero-fire-overlay" aria-hidden="true" /><div className="hero-overlay">
           <div className="hero-est">Est. February 1, 1886 - Los Angeles, California</div>
           <h1>LAFD Knowledge Base</h1>
           <div className="hero-motto">&quot;{HERITAGE.motto}&quot;</div>
